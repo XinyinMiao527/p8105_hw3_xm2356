@@ -62,7 +62,9 @@ head(aisle_counts)
 
 ```
 
-## The plot shows the number of items ordered in each aisle.
+There are `r unique_aisles` unique aisles in the dataset. The top 5 most ordered-from aisles are "fresh vegetables", "fresh fruits", "packaged vegetables fruits", "yogurt", and "packaged cheese".
+
+## The number of items ordered in each aisle.
 ```{r}
 aisle_counts |> 
   filter(n > 10000) |> 
@@ -75,6 +77,7 @@ aisle_counts |>
 
 ```
 
+
 ## The table shows the three most popular items in some of the aisles.
 ```{r}
 instacart |> 
@@ -85,6 +88,7 @@ instacart |>
   knitr::kable()
 
 ```
+
 
 ## The mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week.
 ```{r}
@@ -97,7 +101,7 @@ instacart |>
 
 ```
 
-
+The table indicates that, on average, Coffee Ice Cream is ordered later in the day than Pink Lady Apples across all days of the week. Both products tend to be ordered in the early to mid-afternoon (13:00-15:00).
 
 
 
