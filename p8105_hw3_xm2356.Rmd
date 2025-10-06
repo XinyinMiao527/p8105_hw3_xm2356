@@ -173,9 +173,24 @@ A noticeable dip or stagnation in rental prices occurred in 2020 and 2021 for mo
 
 Beginning in 2022, the market experienced a dramatic surge in rental prices across all boroughs. This indicates a strong and rapid recovery, with rents quickly surpassing pre-pandemic levels.
 
+## NYC Rental Prices
 
+```{r}
+plot_rent_ts <- zillow_df |>
+  group_by(borough, month) |>
+  summarise(avg_rent = mean(rent, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(x = month, y = avg_rent, color = borough)) +
+  geom_line(linewidth = 1) +
+  labs(title = "Average Monthly Rental Prices by Borough", x = "Year", y = "Average Rent") +
+  theme_minimal()
+plot_rent_ts
+```
 
+A significant element is that the Bronx and Staten Island do not exhibit the same V-shaped pattern. Instead, their rental prices show a more consistent, steady increase throughout the entire period, without the dramatic dip seen in the other boroughs.
 
+Despite the mid-period volatility for some boroughs, the overall trend for all five is a clear increase in average rental prices from the beginning to the end of the time series shown.
+
+The plot reveals that the data for Staten Island (Richmond) starts later than the other boroughs, around 2020, indicating a shorter observation period for that borough in this dataset.
 
 
 
