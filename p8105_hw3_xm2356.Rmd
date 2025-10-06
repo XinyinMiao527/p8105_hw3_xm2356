@@ -104,7 +104,54 @@ instacart |>
 The table indicates that, on average, Coffee Ice Cream is ordered later in the day than Pink Lady Apples across all days of the week. Both products tend to be ordered in the early to mid-afternoon (13:00-15:00).
 
 
+# Problem 2
 
+tidy the data
+```{r}
+zori_file <- "data/zillow_data/Zip_zori_uc_sfrcondomfr_sm_month_NYC.csv"
+zip_file  <- "data/zillow_data/Zip Codes.csv"
+
+zori_df <- read_csv(zori_file) |> 
+  pivot_longer(
+    cols = matches("^20"),   
+    names_to = "month",
+    values_to = "rent" # Renamed to 'rent' for clarity
+  ) |> 
+  mutate(
+    month = ymd(month),      
+    year = year(month)
+  )
+
+zip_df <- read_csv(zip_file) |> 
+  janitor::clean_names() |> 
+  distinct(zip_code, .keep_all = TRUE)
+
+# Join the data
+zillow_df <- zori_df |> 
+  left_join(zip_df, by = c("RegionName" = "zip_code")) |> 
+  arrange(RegionName, month) |>
+
+  filter(!is.na(county)) |>
+  rename(borough = county, zip_code = RegionName) 
+
+```
+
+## Number of ZIP codes observed
+
+```{r}
+
+total_months <- n_distinct(zillow_df$month)
+
+zip_summary <- zillow_df |>
+  count(zip_code) |>
+  summarise(
+    total_unique_months = total_months,
+    zips_observed_all_months = sum(n == total_months),
+    zips_observed_rarely = sum(n < 10)
+  )
+
+print(zip_summary)
+```
 
 
 
