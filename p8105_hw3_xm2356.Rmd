@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ```{r}
 library(tidyverse)
 library(knitr)
-
+library(patchwork)
 ```
 
 # Problem 1
@@ -219,6 +219,10 @@ The individual points above the whiskers signify outlier ZIP codes with exceptio
 
 Manhattan has the most numerous and extreme outliers, with some average rents far exceeding $5,000. This highlights the presence of super-premium neighborhoods within the borough. Brooklyn also has several high-priced outliers.
 
+```{r}
+if (!dir.exists("results")) dir.create("results")
+ggsave("results/zillow_analysis.png", plot_rent_ts / plot_rent_dist, width = 10, height = 8)
+```
 
 
 
