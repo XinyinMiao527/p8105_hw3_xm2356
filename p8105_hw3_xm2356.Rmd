@@ -75,6 +75,16 @@ aisle_counts |>
 
 ```
 
+## The table shows the three most popular items in some of the aisles.
+```{r}
+instacart |> 
+  filter(aisle %in% c("baking ingredients", "dog food care", "packaged vegetables fruits")) |> 
+  count(aisle, product_name, sort = TRUE) |> 
+  group_by(aisle) |> 
+  slice_max(n, n = 3) |> 
+  knitr::kable()
+
+```
 
 
 
