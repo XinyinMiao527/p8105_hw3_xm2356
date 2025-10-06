@@ -192,7 +192,32 @@ Despite the mid-period volatility for some boroughs, the overall trend for all f
 
 The plot reveals that the data for Staten Island (Richmond) starts later than the other boroughs, around 2020, indicating a shorter observation period for that borough in this dataset.
 
+## The average rental price within each ZIP code over each month in 2023
 
+```{r}
+plot_rent_dist <- zillow_df |>
+  filter(year == 2023) |>
+  group_by(borough, zip_code) |>
+  summarise(avg_rent_2023 = mean(rent, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(x = fct_reorder(borough, avg_rent_2023), y = avg_rent_2023, fill = borough)) +
+  geom_boxplot() +
+  labs(title = "Distribution of Rental Prices in 2023", x = "Borough", y = "Average Rent") +
+  theme_minimal() +
+  theme(legend.position = "none")
+plot_rent_dist
+```
+
+The plot shows a distinct tiered structure in median rental prices. 
+
+Manhattan (New York) has the highest median rent by a significant margin, followed by Brooklyn (Kings), and then Queens. The Bronx and Staten Island (Richmond) have the lowest median rents and are very comparable to each other.
+
+There are major differences in the range of rental prices within each borough. 
+
+Manhattan and Brooklyn display very wide distributions, evidenced by their large boxes and long whiskers. This indicates a substantial price gap between their most and least expensive neighborhoods. In contrast, the Bronx, Queens, and Staten Island have much more compressed distributions, suggesting more uniform rental prices across their respective ZIP codes.
+
+The individual points above the whiskers signify outlier ZIP codes with exceptionally high rents. 
+
+Manhattan has the most numerous and extreme outliers, with some average rents far exceeding $5,000. This highlights the presence of super-premium neighborhoods within the borough. Brooklyn also has several high-priced outliers.
 
 
 
