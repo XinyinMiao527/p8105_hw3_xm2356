@@ -252,9 +252,52 @@ nhanes_df <-
   )
 ```
 
+## The number of men and women in each education category
+
+```{r}
+nhanes_df |>
+  count(education, sex) |>
+  pivot_wider(names_from = sex, values_from = n) |>
+  kable(caption = "Number of Participants by Education and Sex")
+
+```
+
+## Visualization of the age distributions
+
+```{r}
+nhanes_df |>
+  ggplot(aes(x = age, fill = sex)) +
+  geom_density(alpha = 0.6) +
+  facet_wrap(~ education, nrow = 2) +
+  labs(
+    title = "Age Distribution by Sex and Education", 
+    x = "Age", 
+    y = "Density",
+    fill = "Sex"
+  ) +
+  theme_minimal()
+```
 
 
 
+## Total activities against age
+
+```{r}
+
+minute_data <- select(nhanes_df, starts_with("min"))
+
+total_activity_vector <- rowSums(minute_data, na.rm = TRUE)
+
+nhanes_df <- mutate(nhanes_df, total_activity = total_activity_vector)
+
+ggplot(nhanes_df, aes(x = age, y = total_activity, color = sex)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(method = "lm", se = FALSE) +
+  facet_wrap(~ education, nrow = 2) +
+  labs(title = "Total Daily Activity vs. Age", y = "Total Activity", color = "Sex") +
+  theme_minimal()
+
+```
 
 
 
