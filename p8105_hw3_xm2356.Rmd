@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(tidyverse)
+library(knitr)
+
 ```
 
 # Problem 1
@@ -153,6 +155,23 @@ zip_summary <- zillow_df |>
 print(zip_summary)
 ```
 
+## The average rental price in each borough and year
+```{r}
+avg_rent_table <- zillow_df |>
+  group_by(borough, year) |>
+  summarise(avg_rent = mean(rent, na.rm = TRUE), .groups = "drop") |>
+  pivot_wider(names_from = year, values_from = avg_rent)
+
+kable(avg_rent_table, digits = 0)
+```
+
+There is a consistent and significant upward trend in rental prices across all boroughs from 2015 to 2024. Most boroughs saw their average rents increase by several hundred dollars over the decade.
+
+New York (Manhattan) is consistently the most expensive borough by a large margin, followed by Kings (Brooklyn), Queens, and then the Bronx.
+
+A noticeable dip or stagnation in rental prices occurred in 2020 and 2021 for most boroughs, including New York, Kings, and Queens. This deviation from the growth trend likely reflects the initial impact of the COVID-19 pandemic on the rental market. The Bronx is a notable exception, as its rent continued to rise steadily during this period.
+
+Beginning in 2022, the market experienced a dramatic surge in rental prices across all boroughs. This indicates a strong and rapid recovery, with rents quickly surpassing pre-pandemic levels.
 
 
 
