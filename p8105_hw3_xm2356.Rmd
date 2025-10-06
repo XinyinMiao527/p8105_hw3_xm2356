@@ -1,0 +1,25 @@
+---
+title: "p8105_hw3_xm2356"
+author: "Xinyin Miao (xm2356)"
+date: "2025-10-06"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  fig.width = 8,
+  fig.height = 6 )
+```
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+library(p8105.datasets)
+data("instacart")
+```
+
