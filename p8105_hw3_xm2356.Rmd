@@ -301,6 +301,35 @@ ggplot(nhanes_df, aes(x = age, y = total_activity, color = sex)) +
 
 
 
+## 24-hour activity time courses
+
+```{r}
+nhanes_df |>
+  pivot_longer(
+    cols = starts_with("min"), 
+    names_to = "minute_str",
+    values_to = "mims_value" 
+  ) |>
+  mutate(minute = as.numeric(str_extract(minute_str, "\\d+"))) |>
+  group_by(education, sex, minute) |>
+  summarise(mean_mims = mean(mims_value, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(x = minute, y = mean_mims, color = sex)) +
+  geom_line(alpha = 0.5) +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~ education, nrow = 4) +
+  labs(title = "24-Hour Activity Pattern by Education", x = "Minute of Day", y = "Mean Activity", color = "Sex") +
+  theme_minimal()
+
+```
+
+Across all education levels and for both sexes, there is a clear and consistent daily activity pattern. Activity is lowest during the night, rises sharply in the morning, and gradually declines in the late evening.
+
+In “high school equivalent" and "More than high school" education, the smoothed trend line for female is positioned above the line for males during the active daytime hours.
+
+The timing of daily peaks and troughs appears largely similar for both sexes within each group.
+
+General Activity Peaks: For most groups, there appear to be two primary peaks in activity during the day, which are clarified by the smooth trends. There is a prominent morning peak (roughly between minutes 500-700) and a second, typically lower, peak in the afternoon or early evening.
+
 
 
 
