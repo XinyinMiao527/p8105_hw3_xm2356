@@ -30,12 +30,37 @@ order_id: A unique identifier for each order.
 product_id: A unique identifier for each product.
 product_name: The name of the product.
 aisle_id and aisle: The aisle number and name where the product is located.
-department_id and department: The department number and name.
-order_dow: The day of the week the order was placed (0 = Sunday).
-order_hour_of_day: The hour of the day the order was placed (0-23).
+department: The department name.
+order_dow: The day of the week the order was placed.
+order_hour_of_day: The hour of the day the order was placed.
 
-For example, the first few rows show different items like "Bulgarian Yogurt" and "Organic Whole String Cheese" belonging to different orders.
+```{r}
+instacart |> 
+  summarize(
+    total_obs = n(),
+    unique_users = n_distinct(user_id),
+    unique_orders = n_distinct(order_id),
+    unique_aisles = n_distinct(aisle)
+  )
 
+```
+
+Take the contents of order ID `r instacart$order_id[1]` as an example. This customer ordered 8 items, including 'Bulgarian Yogurt', which is from the 'yogurt' aisle and 'dairy eggs' department. Within these 8 items, 'Bulgarian Yogurt','Organic 4% Milk Fat Whole Milk Cottage Cheese','Lightly Smoked Sardines in Olive Oil', 'Organic Whole String Cheese' have been ordered by this user in the past. And the order was placed on Friday at 10 a.m.There are 9 days since the last order.
+
+## How many aisles are there, and which aisles are the most items ordered from?
+
+```{r}
+
+unique_aisles = instacart |> 
+  summarize(unique_aisles = n_distinct(aisle))
+
+aisle_counts = instacart |> 
+  count(aisle, sort = TRUE)
+
+unique_aisles
+head(aisle_counts)
+
+```
 
 
 
