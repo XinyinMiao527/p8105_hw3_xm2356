@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   warning = FALSE,
   message = FALSE,
   fig.width = 8,
-  fig.height = 6 )
+  fig.height = 8 )
 
 ```
 
@@ -215,7 +215,7 @@ plot_rent_ts <- zillow_df |>
   facet_wrap(~ borough, scales = "free_y", ncol = 1) + 
   
   labs(
-    title = "NYC Rental Prices within ZIP Codes Over Time (Median Trend by Borough)", 
+    title = "NYC Rental Prices", 
     x = "Year", 
     y = "Monthly Rent ($)",
     color = "Borough Median" 
@@ -267,7 +267,7 @@ Manhattan has the most numerous and extreme outliers, with some average rents fa
 
 ```{r}
 if (!dir.exists("results")) dir.create("results")
-ggsave("results/zillow_analysis.png", plot_rent_ts / plot_rent_dist, width = 10, height = 8)
+ggsave("results/zillow_analysis.png", plot_rent_ts / plot_rent_dist, width = 6, height = 12)
 ```
 
 # Problem 3
