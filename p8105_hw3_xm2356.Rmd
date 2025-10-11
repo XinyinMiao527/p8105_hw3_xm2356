@@ -27,16 +27,6 @@ library(p8105.datasets)
 data("instacart")
 ```
 
-The instacart dataset is a large dataframe containing `r nrow(instacart)` observations and `r ncol(instacart)` variables. Each observation represents a single item within a customer's order. Key variables include:
-
-order_id: A unique identifier for each order.
-product_id: A unique identifier for each product.
-product_name: The name of the product.
-aisle_id and aisle: The aisle number and name where the product is located.
-department: The department name.
-order_dow: The day of the week the order was placed.
-order_hour_of_day: The hour of the day the order was placed.
-
 ```{r}
 instacart |> 
   summarize(
@@ -48,7 +38,19 @@ instacart |>
 
 ```
 
+The instacart dataset is a large dataframe containing `r nrow(instacart)` observations and `r ncol(instacart)` variables. Each observation represents a single item within a customer's order. Key variables include:
+
+order_id: A unique identifier for each order.
+product_id: A unique identifier for each product.
+product_name: The name of the product.
+aisle_id and aisle: The aisle number and name where the product is located.
+department: The department name.
+order_dow: The day of the week the order was placed.
+order_hour_of_day: The hour of the day the order was placed.
+
 Take the contents of order ID `r instacart$order_id[1]` as an example. This customer ordered 8 items, including 'Bulgarian Yogurt', which is from the 'yogurt' aisle and 'dairy eggs' department. Within these 8 items, 'Bulgarian Yogurt','Organic 4% Milk Fat Whole Milk Cottage Cheese','Lightly Smoked Sardines in Olive Oil', 'Organic Whole String Cheese' have been ordered by this user in the past. And the order was placed on Friday at 10 a.m.There are 9 days since the last order.
+
+
 
 ## How many aisles are there, and which aisles are the most items ordered from?
 
@@ -80,6 +82,11 @@ aisle_counts |>
 
 ```
 
+Dominance of Fresh Produce: The most prominent feature is the overwhelming popularity of fresh and packaged produce. The top three aisles—"fresh vegetables," "fresh fruits," and "packaged vegetables fruits"—account for the highest number of orders, with "fresh vegetables" leading at over 150,000 orders. This indicates that customers primarily use Instacart for staples and perishables.
+
+Dairy and Drinks: Following produce, major categories like "yogurt," "packaged cheese," "water seltzer sparkling water," and "milk" rank highly, showing that customers frequently replenish dairy and beverage items.
+
+The distribution shows a steep drop-off after the top few categories. The difference in order volume between the top aisle ("fresh vegetables") and aisles further down the list (e.g., "butter" or "oils vinegars") is substantial, highlighting that a small number of aisles drive the majority of Instacart's item volume.
 
 ## The table shows the three most popular items in some of the aisles.
 ```{r}
@@ -92,6 +99,11 @@ instacart |>
 
 ```
 
+Baking Ingredients Dominated by Sweeteners: The most popular items in the "baking ingredients" aisle are "Light Brown Sugar," "Pure Baking Soda," and "Cane Sugar." The high frequency of sugar items suggests that Instacart users are regularly purchasing core ingredients for homemade baking.
+
+Pet Care is Low Volume and Treat-Focused: The "dog food care" aisle shows significantly lower order counts compared to the other two aisles (the top item, "Snack Sticks Chicken & Rice Recipe Dog Treats," has only 30 orders). This low volume might indicate that customers frequently purchase bulky dog food elsewhere, using Instacart mainly for small, specialized items like treats and biscuits.
+
+Packaged Produce is Highly Organic and Berry-Driven: The "packaged vegetables fruits" aisle has very high order counts, consistent with the overall dataset's popularity of produce. The three most popular items—"Organic Baby Spinach," "Organic Raspberries," and "Organic Blueberries"—are all organic, suggesting a strong preference for organic options in this convenient, pre-packaged category.
 
 ## The mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week.
 ```{r}
