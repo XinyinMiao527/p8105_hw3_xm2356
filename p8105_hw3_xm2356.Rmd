@@ -308,6 +308,12 @@ nhanes_df |>
 
 ```
 
+The largest single group of participants for both men and women falls into the "More than high school" category (56 males, 59 females), indicating that the sample is primarily composed of individuals with higher levels of education.
+
+The sample shows near-perfect gender parity in the lowest educational category, "Less than high school" (27 males vs. 28 females), and also in the highest category, "More than high school" (56 males vs. 59 females).
+
+The most notable gender difference occurs in the "High school equivalent" category, where males (35) significantly outnumber females (23). This difference accounts for the slight overall male majority in the total sample size across these three categories.
+
 ## Visualization of the age distributions
 
 ```{r}
