@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   message = FALSE,
   fig.width = 8,
   fig.height = 6 )
+
 ```
 
 ```{r}
@@ -64,7 +65,7 @@ head(aisle_counts)
 
 ```
 
-There are `r unique_aisles` unique aisles in the dataset. The top 5 most ordered-from aisles are "fresh vegetables", "fresh fruits", "packaged vegetables fruits", "yogurt", and "packaged cheese".
+There are `r unique_aisles$unique_aisles` unique aisles in the dataset. The top 5 most ordered-from aisles are "fresh vegetables", "fresh fruits", "packaged vegetables fruits", "yogurt", and "packaged cheese".
 
 ## The number of items ordered in each aisle.
 ```{r}
@@ -152,7 +153,7 @@ zip_summary <- zillow_df |>
     zips_observed_rarely = sum(n < 10)
   )
 
-print(zip_summary)
+kable(zip_summary)
 ```
 
 ## The average rental price in each borough and year
@@ -278,7 +279,13 @@ nhanes_df |>
   theme_minimal()
 ```
 
+The figure displays the age distributions of participants by education level and sex. 
 
+Among individuals with less than a high school education, most participants are middle-aged to older adults, with both sexes showing similar age profiles. 
+
+For those with a high school equivalent education, males appear slightly more concentrated in midlife, while females show a broader age spread extending toward older ages. 
+
+In the group with more than a high school education, the distribution is shifted toward younger ages, particularly among females, indicating that higher education levels are more common in younger participants. Overall, the plot suggests that education level is inversely associated with age in this sample.
 
 ## Total activities against age
 
@@ -299,7 +306,9 @@ ggplot(nhanes_df, aes(x = age, y = total_activity, color = sex)) +
 
 ```
 
+The figure shows the relationship between total daily activity and age, stratified by education level and sex. Across all education levels, total activity decreases with increasing age, indicating that older individuals tend to have lower overall physical activity. The negative slopes of the regression lines are consistent in all panels.
 
+Within each education group, females generally show slightly higher total activity than males at similar ages, though the difference is modest. The decline in activity with age appears steepest among individuals with less than a high school education, while the relationship is somewhat weaker among those with higher education, suggesting that higher education may be associated with maintaining activity levels into older age.
 
 ## 24-hour activity time courses
 
@@ -322,13 +331,11 @@ nhanes_df |>
 
 ```
 
-Across all education levels and for both sexes, there is a clear and consistent daily activity pattern. Activity is lowest during the night, rises sharply in the morning, and gradually declines in the late evening.
+The figure displays the 24-hour activity patterns separated by education level (less than high school, high school equivalent, and more than high school), with sex indicated by color. Across all three panels, activity levels show a clear diurnal rhythm: activity is lowest during the early morning hours, rises sharply after waking (around 300–500 minutes of the day), peaks near midday, and gradually declines during the evening.
 
-In “high school equivalent" and "More than high school" education, the smoothed trend line for female is positioned above the line for males during the active daytime hours.
+Individuals with higher education tend to exhibit slightly higher overall mean activity throughout the day compared to those with less education. In particular, participants with more than high school education show an earlier and sharper rise in activity levels in the morning.
 
-The timing of daily peaks and troughs appears largely similar for both sexes within each group.
-
-General Activity Peaks: For most groups, there appear to be two primary peaks in activity during the day, which are clarified by the smooth trends. There is a prominent morning peak (roughly between minutes 500-700) and a second, typically lower, peak in the afternoon or early evening.
+When comparing sexes, females generally show slightly higher mean activity than males at most times of the day across all education levels. The smoothed curves indicate that while the overall daily pattern is similar, differences in activity magnitude by sex and education are consistent and persistent throughout the 24-hour cycle.
 
 
 
