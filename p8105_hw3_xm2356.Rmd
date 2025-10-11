@@ -201,7 +201,7 @@ borough_median_rent <- zillow_df |>
     .groups = "drop"
   )
 
-plot_zip_ts <- zillow_df |>
+plot_rent_ts <- zillow_df |>
   ggplot(aes(x = month, y = rent)) + 
   geom_line(aes(group = zip_code), alpha = 0.5, color = "grey50") + 
   
@@ -223,14 +223,20 @@ plot_zip_ts <- zillow_df |>
   theme_minimal() +
   theme(legend.position = "bottom")
 
-plot_zip_ts
+plot_rent_ts
 ```
 
-A significant element is that the Bronx and Staten Island do not exhibit the same V-shaped pattern. Instead, their rental prices show a more consistent, steady increase throughout the entire period, without the dramatic dip seen in the other boroughs.
+New York (Manhattan) consistently holds the highest median rent, followed by Kings (Brooklyn) and Queens. Bronx and Richmond (Staten Island) remain the most affordable.
 
-Despite the mid-period volatility for some boroughs, the overall trend for all five is a clear increase in average rental prices from the beginning to the end of the time series shown.
+Manhattan's Extreme Volatility and Recovery: Manhattan shows the most dramatic movement. The colored median line clearly captures the sharp decline around 2020-2021 (COVID-19 impact), followed by an extremely steep, V-shaped recovery that pushes the median rent above pre-pandemic levels by 2024.
 
-The plot reveals that the data for Staten Island (Richmond) starts later than the other boroughs, around 2020, indicating a shorter observation period for that borough in this dataset.
+Heterogeneity within Boroughs (The Grey Lines): The grey lines demonstrate the internal variability:
+
+New York has the widest gap between its lowest and highest-rent ZIP codes, indicated by the broad spread of the grey lines above and below the median.
+
+Bronx and Richmond show the tightest clustering, meaning their ZIP codes have more uniform rental prices.
+
+The median trend lines confirm that all boroughs experienced a dip or stagnation during the pandemic, although the magnitude of the dip was far greater in Manhattan than in the other four boroughs.
 
 ## The average rental price within each ZIP code over each month in 2023
 
@@ -266,7 +272,7 @@ ggsave("results/zillow_analysis.png", plot_rent_ts / plot_rent_dist, width = 10,
 
 # Problem 3
 
-tidy the data 
+## Tidy the data 
 ```{r}
 
 nhanes_df <- 
